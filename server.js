@@ -17,7 +17,12 @@ const app = express();
 // MIDDLEWARE
 // ============================================
 
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
@@ -81,10 +86,6 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-
-    console.log(
-        `SHOP.CO server running on http://localhost:${PORT}`
-    );
-
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`ShopCo Server running on port ${PORT}`);
 });
